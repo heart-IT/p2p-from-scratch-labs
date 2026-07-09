@@ -1,0 +1,53 @@
+{
+  "name": "@heart-it/p2p-swarm-watch",
+  "version": "0.1.0",
+  "description": "heartIT lab #5 \u2014 a swarm observatory: announce vs lookup, churn, reconnects, live. Companion to 'Finding Peers'.",
+  "main": "index.js",
+  "bin": {
+    "p2p-swarm-watch": "./index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "b4a": "^1.6.0",
+    "bare-process": "^4.0.0",
+    "hyperswarm": "^4.17.0",
+    "sodium-universal": "^5.0.0"
+  },
+  "imports": {
+    "process": {
+      "bare": "bare-process",
+      "default": "process"
+    }
+  },
+  "pear": {
+    "name": "p2p-swarm-watch",
+    "stage": {
+      "entrypoints": [
+        "./index.js"
+      ],
+      "ignore": [
+        "/.git",
+        "/.github",
+        "/node_modules",
+        "/test",
+        "/.env",
+        "/.DS_Store",
+        "/README.md"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heart-IT/p2p-from-scratch-labs",
+    "directory": "p2p-swarm-watch"
+  },
+  "license": "MIT",
+  "keywords": [
+    "p2p",
+    "holepunch",
+    "lab",
+    "part-5"
+  ]
+}

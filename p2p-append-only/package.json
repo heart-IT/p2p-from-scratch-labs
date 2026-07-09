@@ -1,0 +1,67 @@
+{
+  "name": "@heart-it/p2p-append-only",
+  "version": "0.1.0",
+  "description": "heartIT lab #3 \u2014 appends move the Merkle root; truncation loudly bumps the fork id. Companion to 'Append-Only Truth'.",
+  "main": "index.js",
+  "bin": {
+    "p2p-append-only": "./index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "b4a": "^1.6.0",
+    "bare-fs": "^4.0.0",
+    "bare-os": "^3.0.0",
+    "bare-path": "^3.0.0",
+    "bare-process": "^4.0.0",
+    "corestore": "^7.10.0"
+  },
+  "imports": {
+    "process": {
+      "bare": "bare-process",
+      "default": "process"
+    },
+    "fs": {
+      "bare": "bare-fs",
+      "default": "fs"
+    },
+    "os": {
+      "bare": "bare-os",
+      "default": "os"
+    },
+    "path": {
+      "bare": "bare-path",
+      "default": "path"
+    }
+  },
+  "pear": {
+    "name": "p2p-append-only",
+    "stage": {
+      "entrypoints": [
+        "./index.js"
+      ],
+      "ignore": [
+        "/.git",
+        "/.github",
+        "/node_modules",
+        "/test",
+        "/.env",
+        "/.DS_Store",
+        "/README.md"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heart-IT/p2p-from-scratch-labs",
+    "directory": "p2p-append-only"
+  },
+  "license": "MIT",
+  "keywords": [
+    "p2p",
+    "holepunch",
+    "lab",
+    "part-3"
+  ]
+}
