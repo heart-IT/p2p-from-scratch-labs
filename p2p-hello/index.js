@@ -14,6 +14,9 @@
 
 'use strict'
 
+/* Explicit require so the imports map in package.json can swap in
+ * bare-process under Bare/Pear — same file runs on both runtimes. */
+const process = require('process')
 const Hyperswarm = require('hyperswarm')
 const sodium = require('sodium-universal')
 const b4a = require('b4a')
