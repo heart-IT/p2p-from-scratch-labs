@@ -134,9 +134,12 @@ async function main () {
 
   console.log('→ type a line and press enter to append. Watch [view] converge on both sides.\n')
 
-  /* Re-render the linearized view whenever it updates */
+  /* Re-render the linearized view whenever it updates. ONE coalesced
+   * renderer: update events fire in bursts (the joiner's catch-up, every
+   * ack round), and two loops sharing the cursor would print every entry
+   * twice. */
   let lastLength = 0
-  base.view.on('append', render)
+  let rendering = false
   base.on('update', render)
 
   /* Concurrent writes can make the linearizer rewind the view and replay
@@ -144,17 +147,29 @@ async function main () {
    * stale lines that other replicas will never show. */
   base.view.on('truncate', function (to) {
     console.log('  [view] reorged — replaying from #' + to + ' in the agreed order')
-    lastLength = to
+    lastLength = Math.min(lastLength, to)
     render()
   })
 
-  async function render () {
-    if (base.view.length === lastLength) return
-    for (let i = lastLength; i < base.view.length; i++) {
+  function render () {
+    if (rendering) return
+    rendering = true
+    drain().then(function () {
+      rendering = false
+      if (lastLength < base.view.length) render() /* updates that landed mid-drain */
+    }, function () {
+      /* teardown cancels in-flight reads — cleanup() owns the exit */
+    })
+  }
+
+  async function drain () {
+    while (lastLength < base.view.length) {
+      const i = lastLength
       const entry = await base.view.get(i)
+      if (i !== lastLength) continue /* a reorg moved the cursor while we read */
       console.log('  [view #' + i + ']  ' + entry.who + '…: ' + entry.msg)
+      lastLength = i + 1
     }
-    lastLength = base.view.length
   }
 
   let pending = ''
@@ -177,6 +192,8 @@ function cleanup () {
     /* Autobase owns the store we handed it — closing the base stops its ack
      * timer and closes the store; never close the store out from under it */
     return base ? base.close() : store.close()
+  }).catch(function () {
+    /* a teardown error must not stop the wipe below */
   }).then(function () {
     fs.rmSync(dir, { recursive: true, force: true })
     process.exit(0)

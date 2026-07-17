@@ -57,6 +57,7 @@ swarm.on('connection', function (conn) {
   const mux = new Protomux(conn)
 
   /* --- channel 1: chat (strings) --- */
+  /* createChannel returns null if the socket died while we were setting up */
   const chat = mux.createChannel({
     protocol: 'heartit/chat',
     onopen: function () {
@@ -67,6 +68,7 @@ swarm.on('connection', function (conn) {
       chats.delete(chatMsg)
     }
   })
+  if (!chat) return
   const chatMsg = chat.addMessage({
     encoding: c.string,
     onmessage: function (text) {
@@ -80,6 +82,7 @@ swarm.on('connection', function (conn) {
     protocol: 'heartit/pulse',
     onopen: function () { console.log('  [pulse] channel open — emitting a counter every 5s') }
   })
+  if (!pulse) return
   const pulseMsg = pulse.addMessage({
     encoding: c.uint,
     onmessage: function (n) {
@@ -112,12 +115,21 @@ process.stdin.on('data', function (chunk) {
     const line = pending.slice(0, nl).trim()
     pending = pending.slice(nl + 1)
     if (!line) continue
+    if (chats.size === 0) {
+      console.log('  (no peer connected yet — nothing sent)')
+      continue
+    }
     showWire('chat', c.string, line)
     for (const chatMsg of chats) chatMsg.send(line)
   }
 })
 
 swarm.join(topic, { server: true, client: true })
+swarm.flush().then(function () {
+  console.log('→ announced on the DHT — a peer running the same phrase can find us now')
+}, function () {
+  console.log('→ [net] DHT unreachable — check your connection; still listening')
+})
 
 process.once('SIGINT', function () {
   console.log('\n→ leaving…')

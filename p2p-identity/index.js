@@ -57,6 +57,10 @@ async function main () {
   console.log('  identity ──signs──▶ phone ──signs──▶ laptop  (' +
     proofLaptop.byteLength + '-byte proof, 2 signatures)\n')
 
+  /* The root secret has done its job — wipe it. Everything below verifies
+   * with the identity PUBLIC key alone; that is the whole point. */
+  id.clear()
+
   /* --- act 3: verify --- */
   const ok = IdentityKey.verify(proofLaptop, null, { expectedIdentity: id.identityPublicKey })
   console.log('→ a stranger, given only the identity public key, verifies the whole chain:')

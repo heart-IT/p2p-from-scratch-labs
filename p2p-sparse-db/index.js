@@ -96,7 +96,9 @@ async function read () {
 
   console.log('→ looking for the seeder…')
   swarm.join(core.discoveryKey, { server: false, client: true })
-  await swarm.flush()
+  await swarm.flush().catch(function () {
+    console.log('  [net] DHT unreachable — check your connection; still looking')
+  })
   await core.update({ wait: true })
 
   console.log('✓ connected. The remote log has ' + core.length + ' blocks (~' +

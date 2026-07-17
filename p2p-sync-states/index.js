@@ -103,7 +103,9 @@ async function follow () {
 
   state('connecting… (nothing local yet)')
   swarm.join(core.discoveryKey, { server: false, client: true })
-  await swarm.flush()
+  await swarm.flush().catch(function () {
+    state('DHT unreachable — check your connection; waiting for it to come back')
+  })
 
   await core.update({ wait: true })
   const missed = core.length

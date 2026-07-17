@@ -28,7 +28,8 @@ const topic = b4a.alloc(32)
 sodium.crypto_generichash(topic, b4a.from('heartit/p2p-swarm-watch::' + passphrase))
 
 const swarm = new Hyperswarm()
-const peers = new Map() /* remotePublicKey hex → { since, connections } */
+const peers = new Map() /* remotePublicKey hex → { since, connections } — never
+  evicted on purpose: reconnect counts ARE the lab; a real app would bound this */
 const started = Date.now()
 
 function stamp () {
