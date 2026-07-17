@@ -61,14 +61,19 @@ async function seed () {
     await batch.put(id, { id: i, amount: Math.round(i * 1.37 * 100) / 100, vendor: 'vendor-' + (i % 97) })
   }
   await batch.flush()
-  await core.update()
 
   console.log('  done. ' + core.length + ' blocks, ' + Math.round(core.byteLength / 1024) + ' KB total in the log\n')
+
+  /* announce BEFORE printing the read command — otherwise terminal 2 can
+   * look up a topic the DHT has not heard about yet */
+  swarm.join(core.discoveryKey, { server: true, client: false })
+  await swarm.flush().catch(function () {
+    console.log('  [net] DHT unreachable — check your connection; still seeding locally')
+  })
+
   console.log('→ seeding on the swarm. In another terminal (or machine), run:\n')
   console.log('  npx @heart-it/p2p-sparse-db read ' + b4a.toString(core.key, 'hex') + '\n')
   console.log('  (ctrl+c here when you are done — the seeder must stay up)')
-
-  swarm.join(core.discoveryKey, { server: true, client: false })
 }
 
 async function read () {
@@ -84,7 +89,7 @@ async function read () {
   let blocks = 0
   core.on('download', function (index, byteLength) {
     blocks++
-    downloaded += typeof byteLength === 'number' ? byteLength : (byteLength ? byteLength.byteLength : 0)
+    downloaded += byteLength
   })
 
   const bee = new Hyperbee(core, { keyEncoding: 'utf-8', valueEncoding: 'json' })

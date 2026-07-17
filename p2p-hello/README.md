@@ -19,8 +19,8 @@ because same-LAN peers connect directly without needing the punch.
 - the 32-byte **topic** (a salted hash of your passphrase — the DHT sees the
   hash, never the phrase)
 - the peer's **Noise key** (their ephemeral identity for this session)
-- the **UDP path** — their actual `host:port`, meaning the connection was
-  hole-punched, not relayed
+- the **UDP path** — the `host:port` we talk to; a public address usually
+  means the connection was hole-punched (relays can look the same)
 - an end-to-end **encrypted hello** (secret-stream won't give you less)
 
 Each line maps to a part of the series: DHT announce/lookup, reflexive

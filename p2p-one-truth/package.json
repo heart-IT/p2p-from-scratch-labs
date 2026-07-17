@@ -1,7 +1,7 @@
 {
   "name": "@heart-it/p2p-one-truth",
-  "version": "0.1.0",
-  "description": "heartIT lab #6 \u2014 two writers, no server, one deterministic linearized view. Companion to 'Many Writers, One Truth'.",
+  "version": "0.1.1",
+  "description": "heartIT lab #6 — two writers, no server, one deterministic linearized view. Companion to 'Many Writers, One Truth'.",
   "main": "index.js",
   "bin": {
     "p2p-one-truth": "./index.js"

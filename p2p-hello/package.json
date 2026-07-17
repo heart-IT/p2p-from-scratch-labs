@@ -1,6 +1,6 @@
 {
   "name": "@heart-it/p2p-hello",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "heartIT lab #1 — two strangers, one passphrase, a hole-punched encrypted connection. Companion to the P2P from Scratch series.",
   "main": "index.js",
   "bin": {
@@ -24,8 +24,18 @@
   "pear": {
     "name": "p2p-hello",
     "stage": {
-      "entrypoints": ["./index.js"],
-      "ignore": ["/.git", "/.github", "/node_modules", "/test", "/.env", "/.DS_Store", "/README.md"]
+      "entrypoints": [
+        "./index.js"
+      ],
+      "ignore": [
+        "/.git",
+        "/.github",
+        "/node_modules",
+        "/test",
+        "/.env",
+        "/.DS_Store",
+        "/README.md"
+      ]
     }
   },
   "repository": {
@@ -34,5 +44,11 @@
     "directory": "p2p-hello"
   },
   "license": "MIT",
-  "keywords": ["p2p", "hyperswarm", "holepunch", "hole-punching", "lab"]
+  "keywords": [
+    "p2p",
+    "hyperswarm",
+    "holepunch",
+    "hole-punching",
+    "lab"
+  ]
 }

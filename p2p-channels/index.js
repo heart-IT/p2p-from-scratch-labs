@@ -34,6 +34,17 @@ const topic = b4a.alloc(32)
 sodium.crypto_generichash(topic, b4a.from('heartit/p2p-channels::' + passphrase))
 
 const swarm = new Hyperswarm()
+const chats = new Set() /* live chat channels — stdin fans out to these */
+
+/* Show what compact encoding actually puts on the wire */
+function showWire (label, encoding, value) {
+  const state = { start: 0, end: 0, buffer: null }
+  encoding.preencode(state, value)         /* pass 1: measure */
+  state.buffer = b4a.alloc(state.end)      /* allocate exactly */
+  encoding.encode(state, value)            /* pass 2: write */
+  console.log('  [wire]  ' + label + ' → ' + state.end + ' byte(s): ' +
+    b4a.toString(state.buffer, 'hex'))
+}
 
 console.log('→ waiting for a peer… (type a line to chat once connected, ctrl+c to leave)')
 
@@ -48,7 +59,13 @@ swarm.on('connection', function (conn) {
   /* --- channel 1: chat (strings) --- */
   const chat = mux.createChannel({
     protocol: 'heartit/chat',
-    onopen: function () { console.log('  [chat]  channel open') }
+    onopen: function () {
+      console.log('  [chat]  channel open')
+      chats.add(chatMsg)
+    },
+    onclose: function () {
+      chats.delete(chatMsg)
+    }
   })
   const chatMsg = chat.addMessage({
     encoding: c.string,
@@ -71,16 +88,6 @@ swarm.on('connection', function (conn) {
   })
   pulse.open()
 
-  /* Show what compact encoding actually puts on the wire */
-  function showWire (label, encoding, value) {
-    const state = { start: 0, end: 0, buffer: null }
-    encoding.preencode(state, value)         /* pass 1: measure */
-    state.buffer = b4a.alloc(state.end)      /* allocate exactly */
-    encoding.encode(state, value)            /* pass 2: write */
-    console.log('  [wire]  ' + label + ' → ' + state.end + ' byte(s): ' +
-      b4a.toString(state.buffer, 'hex'))
-  }
-
   let n = 0
   const timer = setInterval(function () {
     n++
@@ -92,20 +99,22 @@ swarm.on('connection', function (conn) {
     clearInterval(timer)
     console.log('✗ peer left — both channels died with the one socket')
   })
+})
 
-  /* stdin → chat channel (plain line reader — works on Node and Bare) */
-  let pending = ''
-  process.stdin.on('data', function (chunk) {
-    pending += b4a.toString(chunk)
-    let nl
-    while ((nl = pending.indexOf('\n')) !== -1) {
-      const line = pending.slice(0, nl).trim()
-      pending = pending.slice(nl + 1)
-      if (!line) continue
-      showWire('chat', c.string, line)
-      chatMsg.send(line)
-    }
-  })
+/* stdin → every live chat channel (plain line reader — works on Node and
+ * Bare). Registered ONCE at module level: a per-connection listener would
+ * pile up across reconnects and send into dead channels. */
+let pending = ''
+process.stdin.on('data', function (chunk) {
+  pending += b4a.toString(chunk)
+  let nl
+  while ((nl = pending.indexOf('\n')) !== -1) {
+    const line = pending.slice(0, nl).trim()
+    pending = pending.slice(nl + 1)
+    if (!line) continue
+    showWire('chat', c.string, line)
+    for (const chatMsg of chats) chatMsg.send(line)
+  }
 })
 
 swarm.join(topic, { server: true, client: true })

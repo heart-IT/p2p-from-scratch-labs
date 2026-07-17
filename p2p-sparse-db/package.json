@@ -1,7 +1,7 @@
 {
   "name": "@heart-it/p2p-sparse-db",
-  "version": "0.1.0",
-  "description": "heartIT lab #4 \u2014 range-query 50 of 10,000 invoices from a remote Hyperbee and count the KB you downloaded. Companion to 'From Logs to Databases'.",
+  "version": "0.1.1",
+  "description": "heartIT lab #4 — range-query 50 of 10,000 invoices from a remote Hyperbee and count the KB you downloaded. Companion to 'From Logs to Databases'.",
   "main": "index.js",
   "bin": {
     "p2p-sparse-db": "./index.js"

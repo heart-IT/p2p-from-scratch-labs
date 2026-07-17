@@ -1,7 +1,7 @@
 {
   "name": "@heart-it/p2p-channels",
-  "version": "0.1.0",
-  "description": "heartIT lab #2 \u2014 one encrypted socket, two Protomux channels, compact-encoded bytes on the wire. Companion to 'Encrypted Pipes'.",
+  "version": "0.1.1",
+  "description": "heartIT lab #2 — one encrypted socket, two Protomux channels, compact-encoded bytes on the wire. Companion to 'Encrypted Pipes'.",
   "main": "index.js",
   "bin": {
     "p2p-channels": "./index.js"

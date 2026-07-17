@@ -53,15 +53,16 @@ console.log('  client: we query the DHT for other announcers on this topic\n')
 swarm.on('connection', function (conn, info) {
   conn.on('error', function () {})
 
+  const keyHex = b4a.toString(conn.remotePublicKey, 'hex')
   const id = shortKey(conn.remotePublicKey)
-  const known = peers.get(id)
+  const known = peers.get(keyHex)
   const raw = conn.rawStream
 
   if (known) {
     known.connections++
     console.log('  ' + stamp() + '  ↻ ' + id + ' reconnected (connection #' + known.connections + ')')
   } else {
-    peers.set(id, { since: Date.now(), connections: 1 })
+    peers.set(keyHex, { since: Date.now(), connections: 1 })
     console.log('  ' + stamp() + '  ✓ ' + id + ' connected' +
       (raw && raw.remoteHost ? '  via ' + raw.remoteHost + ':' + raw.remotePort : '') +
       (info.client ? '  (we dialed them)' : '  (they dialed us)'))
@@ -75,10 +76,6 @@ swarm.on('connection', function (conn, info) {
   })
 })
 
-swarm.on('update', function () {
-  /* fires as the internal peer list changes — keep it quiet unless idle */
-})
-
 swarm.join(topic, { server: true, client: true })
 
 swarm.flush().then(function () {
@@ -86,6 +83,9 @@ swarm.flush().then(function () {
   status()
   console.log('\n→ leave this open. Every reader of the series who runs the same phrase')
   console.log('  shows up here. Kill and restart another terminal to watch churn + retry.\n')
+}).catch(function () {
+  /* flush rejects when the DHT is unreachable — not fatal, keep listening */
+  console.log('  ' + stamp() + '  [net] DHT unreachable — check your connection; still listening')
 })
 
 process.once('SIGINT', function () {

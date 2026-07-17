@@ -55,13 +55,14 @@ swarm.on('connection', function (conn, info) {
   console.log('✓ peer connected')
   console.log('  noise key   ' + remoteKey.slice(0, 16) + '…  (their ephemeral identity)')
   if (raw && raw.remoteHost) {
-    /* Private-range host = same network (direct, no punch needed);
-     * public host = the DHT-assisted hole-punch did its job. */
+    /* Private-range host = same network (direct, no punch needed). A public
+     * host usually means the hole-punch worked, but a relayed connection
+     * shows a public address too — the address alone is a hint, not proof. */
     const local = /^(10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.|127\.)/.test(raw.remoteHost)
     console.log('  udp path    ' + raw.remoteHost + ':' + raw.remotePort +
       (local
         ? '  (same network — direct, no punch needed)'
-        : '  (hole-punched — their actual public socket, no relay)'))
+        : '  (public address — usually hole-punched, sometimes relayed)'))
   }
   console.log('  encryption  Noise XX handshake complete — everything below is end-to-end encrypted')
   console.log('')
@@ -88,6 +89,9 @@ swarm.join(topic, { server: true, client: true })
 swarm.flush().then(function () {
   console.log('→ fully announced. If nobody appears, you are first — leave this open')
   console.log('  and run the same command on another machine or network.')
+}).catch(function () {
+  /* flush rejects when the DHT is unreachable — not fatal, keep listening */
+  console.log('→ [net] DHT unreachable — check your connection; still listening')
 })
 
 process.once('SIGINT', function () {

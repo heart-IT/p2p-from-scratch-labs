@@ -1,7 +1,7 @@
 {
   "name": "@heart-it/p2p-swarm-watch",
-  "version": "0.1.0",
-  "description": "heartIT lab #5 \u2014 a swarm observatory: announce vs lookup, churn, reconnects, live. Companion to 'Finding Peers'.",
+  "version": "0.1.1",
+  "description": "heartIT lab #5 — a swarm observatory: announce vs lookup, churn, reconnects, live. Companion to 'Finding Peers'.",
   "main": "index.js",
   "bin": {
     "p2p-swarm-watch": "./index.js"

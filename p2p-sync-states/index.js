@@ -57,12 +57,17 @@ async function write () {
   const core = store.get({ name: 'journal' })
   await core.ready()
 
+  /* announce BEFORE printing the follow command — otherwise terminal 2 can
+   * look up a topic the DHT has not heard about yet */
+  swarm.join(core.discoveryKey, { server: true, client: false })
+  await swarm.flush().catch(function () {
+    state('DHT unreachable — check your connection; still writing locally')
+  })
+
   console.log('→ writer up. In another terminal, run:\n')
   console.log('  npx @heart-it/p2p-sync-states follow ' + b4a.toString(core.key, 'hex') + '\n')
   console.log('→ appending an entry every 4s — WITH OR WITHOUT an audience.')
   console.log('  (that is the offline-first contract: local writes never wait for the network)\n')
-
-  swarm.join(core.discoveryKey, { server: true, client: false })
 
   let audience = 0
   swarm.on('connection', function (conn) {
@@ -75,12 +80,15 @@ async function write () {
   })
 
   let n = 0
-  setInterval(async function () {
+  setInterval(function () {
     n++
     const entry = 'entry #' + n + ' at ' + new Date().toISOString().slice(11, 19)
-    await core.append(b4a.from(entry))
-    console.log('  append  ' + entry + '   (log length ' + core.length + ')' +
-      (audience === 0 ? '   [offline — no one is listening, and that is fine]' : ''))
+    core.append(b4a.from(entry)).then(function () {
+      console.log('  append  ' + entry + '   (log length ' + core.length + ')' +
+        (audience === 0 ? '   [offline — no one is listening, and that is fine]' : ''))
+    }, function () {
+      /* append rejects only while ctrl+c teardown closes the store — ignore */
+    })
   }, 4000)
 }
 
@@ -102,16 +110,31 @@ async function follow () {
 
   state('catching up — the writer kept going without us; ' + missed + ' entries to backfill')
 
-  for (let i = 0; i < core.length; i++) {
-    const block = await core.get(i)
+  let printed = 0
+  for (; printed < core.length; printed++) {
+    const block = await core.get(printed)
     console.log('  backfill  ' + b4a.toString(block))
   }
 
   state('live — following in real time')
 
+  /* one 'append' can deliver a whole BATCH of blocks (post-reconnect
+   * catch-up), so drain a cursor up to core.length instead of printing
+   * only the tip — and never run two drains at once */
+  let draining = false
   core.on('append', async function () {
-    const block = await core.get(core.length - 1)
-    console.log('  live      ' + b4a.toString(block))
+    if (draining) return
+    draining = true
+    try {
+      while (printed < core.length) {
+        const block = await core.get(printed)
+        console.log('  live      ' + b4a.toString(block))
+        printed++
+      }
+    } catch (e) {
+      /* get rejects only while ctrl+c teardown closes the store — ignore */
+    }
+    draining = false
   })
 
   /* honest connectivity indicator */

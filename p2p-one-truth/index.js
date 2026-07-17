@@ -33,6 +33,7 @@ const bootstrapHex = process.argv[3]
 const dir = path.join(os.tmpdir(), 'heartit-one-truth-' + Math.random().toString(36).slice(2))
 const store = new Corestore(dir)
 const swarm = new Hyperswarm()
+let base = null /* assigned in main(); module-level so cleanup() can close it */
 
 if (mode !== 'new' && mode !== 'join') {
   console.error('usage: p2p-one-truth new              (terminal 1)')
@@ -52,6 +53,8 @@ async function apply (nodes, view, host) {
   for (const node of nodes) {
     const value = node.value
     if (value.add) {
+      /* indexer: true so both peers count toward quorum in this 2-writer
+       * lab; real apps keep most writers { indexer: false } */
       await host.addWriter(b4a.from(value.add, 'hex'), { indexer: true })
       continue
     }
@@ -67,7 +70,7 @@ function open (viewStore) {
 }
 
 async function main () {
-  const base = new Autobase(store, mode === 'join' ? b4a.from(bootstrapHex, 'hex') : null, {
+  base = new Autobase(store, mode === 'join' ? b4a.from(bootstrapHex, 'hex') : null, {
     apply: apply,
     open: open,
     valueEncoding: 'json',
@@ -94,7 +97,16 @@ async function main () {
      * add-writer op THROUGH the log, so membership changes live in the same
      * ordered history as the data. */
     const mux = Protomux.from(conn)
-    const channel = mux.createChannel({ protocol: 'heartit/add-writer' })
+    const channel = mux.createChannel({
+      protocol: 'heartit/add-writer',
+      onopen: function () {
+        /* onopen fires once BOTH sides opened the channel — only then is a
+         * send guaranteed to have a listener on the other end */
+        if (mode === 'join' && !base.writable) {
+          announce.send(b4a.toString(base.local.key, 'hex'))
+        }
+      }
+    })
     if (!channel) return
 
     const announce = channel.addMessage({
@@ -107,10 +119,6 @@ async function main () {
       }
     })
     channel.open()
-
-    if (mode === 'join' && !base.writable) {
-      announce.send(b4a.toString(base.local.key, 'hex'))
-    }
   })
 
   swarm.join(base.discoveryKey, { server: true, client: true })
@@ -130,6 +138,15 @@ async function main () {
   let lastLength = 0
   base.view.on('append', render)
   base.on('update', render)
+
+  /* Concurrent writes can make the linearizer rewind the view and replay
+   * entries in the agreed order — surface the reorg instead of keeping
+   * stale lines that other replicas will never show. */
+  base.view.on('truncate', function (to) {
+    console.log('  [view] reorged — replaying from #' + to + ' in the agreed order')
+    lastLength = to
+    render()
+  })
 
   async function render () {
     if (base.view.length === lastLength) return
@@ -157,7 +174,9 @@ async function main () {
 
 function cleanup () {
   swarm.destroy().then(function () {
-    return store.close()
+    /* Autobase owns the store we handed it — closing the base stops its ack
+     * timer and closes the store; never close the store out from under it */
+    return base ? base.close() : store.close()
   }).then(function () {
     fs.rmSync(dir, { recursive: true, force: true })
     process.exit(0)
