@@ -1,6 +1,6 @@
 {
   "name": "@heart-it/p2p-hello",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "heartIT lab #1 — two strangers, one passphrase, a hole-punched encrypted connection. Companion to the P2P from Scratch series.",
   "main": "index.js",
   "bin": {

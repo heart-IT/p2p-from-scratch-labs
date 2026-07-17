@@ -121,7 +121,17 @@ async function main () {
     channel.open()
   })
 
-  swarm.join(base.discoveryKey, { server: true, client: true })
+  const discovery = swarm.join(base.discoveryKey, { server: true, client: true })
+
+  /* A brand-new topic takes a few seconds to propagate through the DHT, and
+   * hyperswarm re-queries a topic only every 10 minutes — tuned for
+   * long-lived topics, not two terminals racing to find each other on a
+   * key created moments ago. Until the first peer shows up, redo the
+   * announce+lookup round ourselves. */
+  setInterval(function () {
+    if (swarm.connections.size > 0) return
+    discovery.refresh().catch(function () {}) /* rejects while offline — retry covers it */
+  }, 3000)
 
   if (mode === 'join') {
     console.log('→ waiting to be added as a writer…')

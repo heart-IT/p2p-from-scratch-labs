@@ -84,7 +84,16 @@ swarm.on('connection', function (conn, info) {
 
 /* server: true → announce ourselves; client: true → look for others.
  * Both on, so any two copies of this lab can find each other. */
-swarm.join(topic, { server: true, client: true })
+const discovery = swarm.join(topic, { server: true, client: true })
+
+/* A brand-new topic takes a few seconds to propagate through the DHT, and
+ * hyperswarm re-queries a topic only every 10 minutes — tuned for long-lived
+ * topics, not two terminals racing to find each other on a phrase typed
+ * moments ago. Until a peer shows up, redo the announce+lookup ourselves. */
+setInterval(function () {
+  if (swarm.connections.size > 0) return
+  discovery.refresh().catch(function () {}) /* rejects while offline — retry covers it */
+}, 3000)
 
 swarm.flush().then(function () {
   console.log('→ fully announced. If nobody appears, you are first — leave this open')
