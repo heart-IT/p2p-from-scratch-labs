@@ -1,10 +1,10 @@
 {
   "name": "@heart-it/p2p-identity",
   "version": "0.1.0",
-  "description": "heartIT lab #7 \u2014 24 words become an identity; attest a device, verify the chain, understand why key loss is permanent. Companion to 'Trust No One, Verify Everything'.",
+  "description": "heartIT lab #7 — 24 words become an identity; attest a device, verify the chain, understand why key loss is permanent. Companion to 'Trust No One, Verify Everything'.",
   "main": "index.js",
   "bin": {
-    "p2p-identity": "./index.js"
+    "p2p-identity": "index.js"
   },
   "engines": {
     "node": ">=18"
@@ -40,7 +40,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heart-IT/p2p-from-scratch-labs",
+    "url": "git+https://github.com/heart-IT/p2p-from-scratch-labs.git",
     "directory": "p2p-identity"
   },
   "license": "MIT",

@@ -4,7 +4,7 @@
   "description": "heartIT lab #1 — two strangers, one passphrase, a hole-punched encrypted connection. Companion to the P2P from Scratch series.",
   "main": "index.js",
   "bin": {
-    "p2p-hello": "./index.js"
+    "p2p-hello": "index.js"
   },
   "engines": {
     "node": ">=18"
@@ -40,7 +40,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heart-IT/p2p-from-scratch-labs",
+    "url": "git+https://github.com/heart-IT/p2p-from-scratch-labs.git",
     "directory": "p2p-hello"
   },
   "license": "MIT",

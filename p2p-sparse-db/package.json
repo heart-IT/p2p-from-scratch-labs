@@ -4,7 +4,7 @@
   "description": "heartIT lab #4 — range-query 50 of 10,000 invoices from a remote Hyperbee and count the KB you downloaded. Companion to 'From Logs to Databases'.",
   "main": "index.js",
   "bin": {
-    "p2p-sparse-db": "./index.js"
+    "p2p-sparse-db": "index.js"
   },
   "engines": {
     "node": ">=18"
@@ -56,7 +56,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heart-IT/p2p-from-scratch-labs",
+    "url": "git+https://github.com/heart-IT/p2p-from-scratch-labs.git",
     "directory": "p2p-sparse-db"
   },
   "license": "MIT",

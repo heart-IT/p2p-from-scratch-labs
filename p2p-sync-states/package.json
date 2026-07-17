@@ -4,7 +4,7 @@
   "description": "heartIT lab #8 — offline-first writes, late-join catch-up, honest sync indicators. Companion to 'Building for Humans'.",
   "main": "index.js",
   "bin": {
-    "p2p-sync-states": "./index.js"
+    "p2p-sync-states": "index.js"
   },
   "engines": {
     "node": ">=18"
@@ -55,7 +55,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heart-IT/p2p-from-scratch-labs",
+    "url": "git+https://github.com/heart-IT/p2p-from-scratch-labs.git",
     "directory": "p2p-sync-states"
   },
   "license": "MIT",

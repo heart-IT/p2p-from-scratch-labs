@@ -1,10 +1,10 @@
 {
   "name": "@heart-it/p2p-append-only",
   "version": "0.1.0",
-  "description": "heartIT lab #3 \u2014 appends move the Merkle root; truncation loudly bumps the fork id. Companion to 'Append-Only Truth'.",
+  "description": "heartIT lab #3 — appends move the Merkle root; truncation loudly bumps the fork id. Companion to 'Append-Only Truth'.",
   "main": "index.js",
   "bin": {
-    "p2p-append-only": "./index.js"
+    "p2p-append-only": "index.js"
   },
   "engines": {
     "node": ">=18"
@@ -54,7 +54,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heart-IT/p2p-from-scratch-labs",
+    "url": "git+https://github.com/heart-IT/p2p-from-scratch-labs.git",
     "directory": "p2p-append-only"
   },
   "license": "MIT",

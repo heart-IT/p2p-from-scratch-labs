@@ -4,7 +4,7 @@
   "description": "heartIT lab #2 — one encrypted socket, two Protomux channels, compact-encoded bytes on the wire. Companion to 'Encrypted Pipes'.",
   "main": "index.js",
   "bin": {
-    "p2p-channels": "./index.js"
+    "p2p-channels": "index.js"
   },
   "engines": {
     "node": ">=18"
@@ -42,7 +42,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heart-IT/p2p-from-scratch-labs",
+    "url": "git+https://github.com/heart-IT/p2p-from-scratch-labs.git",
     "directory": "p2p-channels"
   },
   "license": "MIT",

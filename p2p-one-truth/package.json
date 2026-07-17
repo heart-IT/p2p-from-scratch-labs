@@ -4,7 +4,7 @@
   "description": "heartIT lab #6 — two writers, no server, one deterministic linearized view. Companion to 'Many Writers, One Truth'.",
   "main": "index.js",
   "bin": {
-    "p2p-one-truth": "./index.js"
+    "p2p-one-truth": "index.js"
   },
   "engines": {
     "node": ">=18"
@@ -58,7 +58,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heart-IT/p2p-from-scratch-labs",
+    "url": "git+https://github.com/heart-IT/p2p-from-scratch-labs.git",
     "directory": "p2p-one-truth"
   },
   "license": "MIT",
