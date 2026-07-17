@@ -1,0 +1,69 @@
+{
+  "name": "@heart-it/p2p-drop",
+  "version": "0.1.0",
+  "description": "heartIT lab #10 — list a remote Hyperdrive from metadata alone, then sparsely download one file and count the bytes per core. Companion to 'From Logs to Databases'.",
+  "main": "index.js",
+  "bin": {
+    "p2p-drop": "index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "b4a": "1.8.1",
+    "bare-fs": "4.7.4",
+    "bare-os": "3.9.3",
+    "bare-path": "3.1.1",
+    "bare-process": "4.5.1",
+    "corestore": "7.11.1",
+    "hyperdrive": "13.3.3",
+    "hyperswarm": "4.17.0"
+  },
+  "imports": {
+    "process": {
+      "bare": "bare-process",
+      "default": "process"
+    },
+    "fs": {
+      "bare": "bare-fs",
+      "default": "fs"
+    },
+    "os": {
+      "bare": "bare-os",
+      "default": "os"
+    },
+    "path": {
+      "bare": "bare-path",
+      "default": "path"
+    }
+  },
+  "pear": {
+    "name": "p2p-drop",
+    "stage": {
+      "entrypoints": [
+        "./index.js"
+      ],
+      "ignore": [
+        "/.git",
+        "/.github",
+        "/node_modules",
+        "/test",
+        "/.env",
+        "/.DS_Store",
+        "/README.md"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heart-IT/p2p-from-scratch-labs.git",
+    "directory": "p2p-drop"
+  },
+  "license": "MIT",
+  "keywords": [
+    "p2p",
+    "holepunch",
+    "lab",
+    "part-4"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "name": "@heart-it/p2p-quorum",
+  "version": "0.1.0",
+  "description": "heartIT lab #11 — three Autobase indexers; a 2-of-3 majority keeps the checkpoint advancing while one member is gone, and the returner replays into the agreed order. Companion to 'Many Writers, One Truth'.",
+  "main": "index.js",
+  "bin": {
+    "p2p-quorum": "index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "autobase": "7.28.1",
+    "b4a": "1.8.1",
+    "bare-fs": "4.7.4",
+    "bare-os": "3.9.3",
+    "bare-path": "3.1.1",
+    "bare-process": "4.5.1",
+    "compact-encoding": "3.3.0",
+    "corestore": "7.11.1",
+    "hyperswarm": "4.17.0",
+    "protomux": "3.11.0"
+  },
+  "imports": {
+    "process": {
+      "bare": "bare-process",
+      "default": "process"
+    },
+    "fs": {
+      "bare": "bare-fs",
+      "default": "fs"
+    },
+    "os": {
+      "bare": "bare-os",
+      "default": "os"
+    },
+    "path": {
+      "bare": "bare-path",
+      "default": "path"
+    }
+  },
+  "pear": {
+    "name": "p2p-quorum",
+    "stage": {
+      "entrypoints": [
+        "./index.js"
+      ],
+      "ignore": [
+        "/.git",
+        "/.github",
+        "/node_modules",
+        "/test",
+        "/.env",
+        "/.DS_Store",
+        "/README.md"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heart-IT/p2p-from-scratch-labs.git",
+    "directory": "p2p-quorum"
+  },
+  "license": "MIT",
+  "keywords": [
+    "p2p",
+    "holepunch",
+    "lab",
+    "part-6"
+  ]
+}

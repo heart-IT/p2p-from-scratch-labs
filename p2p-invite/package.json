@@ -1,0 +1,70 @@
+{
+  "name": "@heart-it/p2p-invite",
+  "version": "0.1.0",
+  "description": "heartIT lab #12 — an invite string that grants admission without containing the key: blind pairing over the DHT. Companion to 'Trust No One, Verify Everything'.",
+  "main": "index.js",
+  "bin": {
+    "p2p-invite": "index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "b4a": "1.8.1",
+    "bare-fs": "4.7.4",
+    "bare-os": "3.9.3",
+    "bare-path": "3.1.1",
+    "bare-process": "4.5.1",
+    "blind-pairing": "2.3.1",
+    "corestore": "7.11.1",
+    "hyperswarm": "4.17.0",
+    "z32": "1.1.0"
+  },
+  "imports": {
+    "process": {
+      "bare": "bare-process",
+      "default": "process"
+    },
+    "fs": {
+      "bare": "bare-fs",
+      "default": "fs"
+    },
+    "os": {
+      "bare": "bare-os",
+      "default": "os"
+    },
+    "path": {
+      "bare": "bare-path",
+      "default": "path"
+    }
+  },
+  "pear": {
+    "name": "p2p-invite",
+    "stage": {
+      "entrypoints": [
+        "./index.js"
+      ],
+      "ignore": [
+        "/.git",
+        "/.github",
+        "/node_modules",
+        "/test",
+        "/.env",
+        "/.DS_Store",
+        "/README.md"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heart-IT/p2p-from-scratch-labs.git",
+    "directory": "p2p-invite"
+  },
+  "license": "MIT",
+  "keywords": [
+    "p2p",
+    "holepunch",
+    "lab",
+    "part-7"
+  ]
+}

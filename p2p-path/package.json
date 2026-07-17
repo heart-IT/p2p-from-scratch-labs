@@ -1,0 +1,56 @@
+{
+  "name": "@heart-it/p2p-path",
+  "version": "0.1.0",
+  "description": "heartIT lab #9 — what the DHT knows about you, the millisecond timeline of a connection, and an honest read of the path it took. Companion to the P2P from Scratch series.",
+  "main": "index.js",
+  "bin": {
+    "p2p-path": "index.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "b4a": "1.8.1",
+    "bare-process": "4.5.1",
+    "hyperswarm": "4.17.0",
+    "sodium-universal": "5.0.1"
+  },
+  "imports": {
+    "process": {
+      "bare": "bare-process",
+      "default": "process"
+    }
+  },
+  "pear": {
+    "name": "p2p-path",
+    "stage": {
+      "entrypoints": [
+        "./index.js"
+      ],
+      "ignore": [
+        "/.git",
+        "/.github",
+        "/node_modules",
+        "/test",
+        "/.env",
+        "/.DS_Store",
+        "/README.md"
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heart-IT/p2p-from-scratch-labs.git",
+    "directory": "p2p-path"
+  },
+  "license": "MIT",
+  "keywords": [
+    "p2p",
+    "hyperswarm",
+    "holepunch",
+    "hole-punching",
+    "nat",
+    "dht",
+    "lab"
+  ]
+}
