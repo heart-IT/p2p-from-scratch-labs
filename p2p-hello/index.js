@@ -4,7 +4,7 @@
  *
  * Two strangers run this with the same passphrase. Their machines find each
  * other through the Hyperswarm DHT, hole-punch a direct UDP path, open an
- * encrypted stream (Noise XX via secret-stream — you never asked for
+ * encrypted stream (Noise IK via secret-stream — you never asked for
  * encryption; the stack refuses to give you less), and say hello.
  *
  * No server. No account. Kill it and nothing remains.
@@ -53,7 +53,7 @@ swarm.on('connection', function (conn, info) {
 
   console.log('')
   console.log('✓ peer connected')
-  console.log('  noise key   ' + remoteKey.slice(0, 16) + '…  (their ephemeral identity)')
+  console.log('  noise key   ' + remoteKey.slice(0, 16) + '…  (their static key for this run)')
   if (raw && raw.remoteHost) {
     /* Private-range host = same network (direct, no punch needed). A public
      * host usually means the hole-punch worked, but a relayed connection
@@ -64,7 +64,7 @@ swarm.on('connection', function (conn, info) {
         ? '  (same network — direct, no punch needed)'
         : '  (public address — usually hole-punched, sometimes relayed)'))
   }
-  console.log('  encryption  Noise XX handshake complete — everything below is end-to-end encrypted')
+  console.log('  encryption  Noise IK handshake complete — everything below is end-to-end encrypted')
   console.log('')
 
   conn.write('hello from ' + b4a.toString(swarm.keyPair.publicKey, 'hex').slice(0, 8) + '… 👋')

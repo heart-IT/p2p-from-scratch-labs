@@ -184,10 +184,10 @@ swarm.on('connection', function (conn, info) {
   statsBefore = statsAfter
 
   console.log(stamp() + ' connection open ' + (info.client ? '(we dialed them)' : '(they dialed us)') +
-    ' — Noise XX handshake done, stream is end-to-end encrypted\n')
+    ' — Noise IK handshake done, stream is end-to-end encrypted\n')
 
   console.log('[path]')
-  console.log('  peer        ' + shortKey(conn.remotePublicKey) + '  (their ephemeral noise key)')
+  console.log('  peer        ' + shortKey(conn.remotePublicKey) + '  (their Noise static key for this run)')
   if (raw && raw.remoteHost) {
     const c = classify(raw.remoteHost)
     const wildcard = raw.localHost === '0.0.0.0' || raw.localHost === '::'

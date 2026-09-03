@@ -16,4 +16,4 @@ npx @heart-it/p2p-channels <passphrase>   # same phrase, two terminals
 
 ## What it maps to
 
-Noise XX gave you the encrypted socket before you asked; Protomux splits it into independent protocols; compact encoding is the preencode→allocate→encode dance on every message.
+Noise IK gave you the encrypted socket before you asked; Protomux splits it into independent protocols; compact encoding is the preencode→allocate→encode dance on every message.

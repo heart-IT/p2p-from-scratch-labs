@@ -3,7 +3,7 @@
  * p2p-channels — heartIT lab #2 (companion to "Encrypted Pipes")
  *
  * One encrypted socket, many protocols. Two peers connect over Hyperswarm
- * (the connection is already a Secret Stream — Noise XX, end-to-end
+ * (the connection is already a Secret Stream — Noise IK, end-to-end
  * encrypted), then Protomux multiplexes two independent channels over it:
  *
  *   chat   — strings you type, compact-encoded
@@ -51,7 +51,7 @@ console.log('→ waiting for a peer… (type a line to chat once connected, ctrl
 swarm.on('connection', function (conn) {
   conn.on('error', function () {})
 
-  console.log('✓ peer connected — Noise XX done, socket is end-to-end encrypted')
+  console.log('✓ peer connected — Noise IK done, socket is end-to-end encrypted')
   console.log('  opening two Protomux channels over the ONE socket:\n')
 
   const mux = new Protomux(conn)
