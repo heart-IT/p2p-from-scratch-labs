@@ -1,0 +1,30 @@
+{
+  "name": "p2p-system-verify",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Executable assertions for every version-sensitive claim in the P2P from Scratch series",
+  "scripts": {
+    "verify": "node src-asserts.js && node run-asserts.js"
+  },
+  "dependencies": {
+    "@hyperswarm/secret-stream": "*",
+    "autobase": "*",
+    "b4a": "*",
+    "blind-pairing-core": "*",
+    "compact-encoding": "*",
+    "corestore": "*",
+    "dht-rpc": "*",
+    "flat-tree": "*",
+    "hyperbee": "*",
+    "hyperblobs": "*",
+    "hypercore": "*",
+    "hypercore-crypto": "*",
+    "hypercore-storage": "*",
+    "hyperdht": "*",
+    "hyperdrive": "*",
+    "hyperswarm": "*",
+    "noise-handshake": "*",
+    "protomux": "*",
+    "sodium-native": "*"
+  }
+}
