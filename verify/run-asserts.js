@@ -99,7 +99,22 @@ async function autobaseViewShape () {
   await raw.close(); await bee.close()
 }
 
+async function discoveryKeyDerivation () {
+  const Hypercore = require('hypercore')
+  const crypto = require('hypercore-crypto')
+  const Verifier = require('hypercore/lib/verifier.js')
+  const c = new Hypercore(require('os').tmpdir() + '/dk-' + Date.now())
+  await c.ready()
+  const signing = c.manifest.signers[0].publicKey
+  ok('discoveryKey is keyed on core.key', b4a.equals(crypto.discoveryKey(c.key), c.discoveryKey))
+  ok('core.key is the manifest hash', b4a.equals(c.key, Verifier.manifestHash(c.manifest)))
+  ok('core.key is NOT the Ed25519 signing key', !b4a.equals(c.key, signing))
+  ok('hashing the signing key gives the WRONG discovery key', !b4a.equals(crypto.discoveryKey(signing), c.discoveryKey))
+  await c.close()
+}
+
 async function main () {
+  await discoveryKeyDerivation()
   natPaths()
   await secretStreamFrames()
   await hypercoreBehaviour()
