@@ -114,5 +114,23 @@ check('XChaCha20-Poly1305 IETF AEAD', /crypto_aead_xchacha20poly1305_ietf_encryp
 check('invite seed = 32 random bytes', /seed\s*=\s*crypto\.randomBytes\(32\)/.test(bp))
 check('response checked against invite discoveryKey', /crypto\.discoveryKey\(key\)[\s\S]{0,120}does not match discoveryKey/.test(bp))
 
+// --- pear-runtime: the API Part 8 tells readers to use after the global Pear object went away
+try {
+  // pear-runtime restricts its exports map, so resolve by path rather than require.resolve
+  const prDir = path.join(__dirname, 'node_modules', 'pear-runtime')
+  const upDir = path.join(__dirname, 'node_modules', 'pear-runtime-updater')
+  const prPkg = JSON.parse(fs.readFileSync(path.join(prDir, 'package.json'), 'utf8'))
+  const pr = fs.readFileSync(path.join(prDir, 'index.js'), 'utf8')
+  console.log('=== pear-runtime ' + prPkg.version)
+  check('runtime exposes an updater', /this\.updater\s*=\s*new PearRuntimeUpdater/.test(pr))
+  check('runtime exposes a storage path', /this\.storage\s*=\s*opts\.storage/.test(pr))
+  const up = fs.readFileSync(path.join(upDir, 'index.js'), 'utf8')
+  check("updater emits 'updating'", /emit\('updating'\)/.test(up))
+  check("updater emits 'updated'", /emit\('updated'\)/.test(up))
+  check('updater exposes applyUpdate()', /async applyUpdate\s*\(/.test(up))
+} catch (err) {
+  console.log('=== pear-runtime not installed — skipping (npm i pear-runtime to include)')
+}
+
 console.log('\n' + pass + ' passed, ' + fail + ' failed')
 process.exit(fail ? 1 : 0)

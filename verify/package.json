@@ -26,6 +26,8 @@
     "hyperswarm": "*",
     "noise-handshake": "*",
     "protomux": "*",
-    "sodium-native": "*"
+    "sodium-native": "*",
+    "pear-runtime": "*",
+    "pear-runtime-updater": "*"
   }
 }
