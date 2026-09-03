@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "description": "Executable assertions for every version-sensitive claim in the P2P from Scratch series",
   "scripts": {
-    "verify": "node src-asserts.js && node run-asserts.js"
+    "verify": "node src-asserts.js && node run-asserts.js && node api-asserts.js",
+    "api": "node api-asserts.js"
   },
   "dependencies": {
     "@hyperswarm/secret-stream": "*",

@@ -12,7 +12,10 @@ npm run verify
 ```
 
 `src-asserts.js` reads the installed source and checks the constants and shapes
-the posts cite. `run-asserts.js` executes the behaviour: it spins up a testnet,
+the posts cite. `api-asserts.js` asserts that every method and property the
+published snippets call actually exists — the surface was extracted from the
+posts' own code blocks, so a red run there means a reader copying from the
+series hits an undefined. `run-asserts.js` executes the behaviour: it spins up a testnet,
 records which Noise pattern a real Hyperswarm connection negotiates, drives the
 NAT classifier down all four paths, measures secret-stream framing, captures
 replication messages off the wire, and builds both Autobase view shapes.
@@ -24,6 +27,14 @@ Exit code is non-zero if any assertion fails, so it drops into CI as-is.
 Not necessarily a bug. It means a published sentence no longer matches the
 code, which is exactly what this is for. The assertion names map onto the
 claims, so a failure names the sentence to fix.
+
+## The other half of the gate
+
+This suite catches claims that drift away from the code. It cannot catch a
+statement that is wrong only when two posts are read together, or a correction
+that landed in one place while the old belief survived in another — both of
+which happened. `check-consistency.js` in the blogs repo covers those, and
+`publish.js` refuses to publish a topic that fails it.
 
 ## Known drift this caught
 
