@@ -7,7 +7,7 @@
     "p2p-quorum": "index.js"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
     "autobase": "7.28.1",

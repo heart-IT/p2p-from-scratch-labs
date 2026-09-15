@@ -7,7 +7,7 @@
     "p2p-sparse-db": "index.js"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
     "b4a": "^1.6.0",

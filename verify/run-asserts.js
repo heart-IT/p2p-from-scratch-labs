@@ -96,6 +96,10 @@ async function autobaseViewShape () {
   ok('TRAP: a raw Hypercore also has .core, without the markers', raw.view.core !== undefined && raw.view.core.signedLength === undefined)
   const pick = (b) => typeof b.view.signedLength === 'number' ? b.view : b.view.core
   ok('published idiom works on both shapes', typeof pick(raw).signedLength === 'number' && typeof pick(bee).signedLength === 'number')
+  const hist = []; for await (const node of bee.view.createHistoryStream()) hist.push(node)
+  const blocks = await Promise.all(hist.map(n => bee.view.getBySeq(n.seq)))
+  ok('Hyperbee view: block 0 is the header, so entry i is not block i', hist.length === 1 && hist[0].seq === 1 && bee.view.core.length === 2)
+  ok('Hyperbee view: history seq is the core block index (seq < core.signedLength means confirmed)', hist.every((n, i) => blocks[i] && blocks[i].key === n.key && n.seq < bee.view.core.length))
   await raw.close(); await bee.close()
 }
 

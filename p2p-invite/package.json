@@ -7,7 +7,7 @@
     "p2p-invite": "index.js"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
     "b4a": "1.8.1",
