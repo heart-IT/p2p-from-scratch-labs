@@ -1,6 +1,6 @@
 {
   "name": "@heart-it/p2p-drop",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "heartIT lab #10 — list a remote Hyperdrive from metadata alone, then sparsely download one file and count the bytes per core. Companion to 'From Logs to Databases'.",
   "main": "index.js",
   "bin": {

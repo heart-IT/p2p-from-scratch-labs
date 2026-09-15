@@ -1,6 +1,6 @@
 {
   "name": "@heart-it/p2p-identity",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "heartIT lab #7 — 24 words become an identity; attest a device, verify the chain, understand why key loss is permanent. Companion to 'Trust No One, Verify Everything'.",
   "main": "index.js",
   "bin": {
