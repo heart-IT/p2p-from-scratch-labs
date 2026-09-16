@@ -1,7 +1,7 @@
 {
   "name": "@heart-it/p2p-quorum",
-  "version": "0.1.1",
-  "description": "heartIT lab #11 — three Autobase indexers; a 2-of-3 majority keeps the checkpoint advancing while one member is gone, and the returner replays into the agreed order. Companion to 'Many Writers, One Truth'.",
+  "version": "0.1.2",
+  "description": "heartIT lab #11 — three Autobase indexers; a 2-of-3 majority keeps the checkpoint advancing while one member is gone, and a restarted terminal rejoins as a fourth indexer that catches up to the agreed order. Companion to 'Many Writers, One Truth'.",
   "main": "index.js",
   "bin": {
     "p2p-quorum": "index.js"

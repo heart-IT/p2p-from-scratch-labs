@@ -20,10 +20,10 @@ npx @heart-it/p2p-quorum join <key>    # terminals 2 and 3 (key printed by termi
 
 1. Open all three terminals and type in each — every side converges, and `agreed` catches up to `seen` within a second or two (each ack round is a vote).
 2. Ctrl-C terminal 3, keep typing in 1 and 2 — `agreed` KEEPS advancing: 2 of 3 indexers is a majority, so the checkpoint moves without the missing member.
-3. Re-run the same `join` command in terminal 3 — it backfills the whole view, replays anything the majority reordered while it was gone, and converges.
+3. Re-run the same `join` command in terminal 3 — it joins as a fourth indexer, backfills the whole view, applies it in the order the majority agreed while terminal 3 was down, and converges.
 
 The restarted terminal is a fresh temp store with a fresh local key, so it is re-admitted as a NEW writer — the `[quorum]` line honestly reads `writers 4` (three of them alive). Real apps persist their store so a returning device keeps its identity; this lab trades that for a zero-setup demo.
 
 ## What it maps to
 
-Quorum consensus over a causal DAG: indexers ack what they have seen, and once a majority — ⌊n/2⌋+1, so 2 of 3 — acks a point, it becomes a signed checkpoint that can never reorder. That is why the checkpoint keeps advancing while one member is down, and why the returner replays against the AGREED order rather than its own: pending entries may still move, checkpointed ones cannot.
+Quorum consensus over a causal DAG: indexers ack what they have seen, and once a majority — ⌊n/2⌋+1, so 2 of 3 — acks a point, it becomes a signed checkpoint that can never reorder. That is why the checkpoint keeps advancing while one member is down, and why a newcomer applies the AGREED order rather than its own: pending entries may still move, checkpointed ones cannot.
