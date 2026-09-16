@@ -1,6 +1,6 @@
 # p2p-drop — heartIT lab #10
 
-Companion lab for **Part 4: From Logs to Databases: Hyperbee, Hyperdrive, and Corestore** of the P2P from Scratch series on
+Companion lab for **Part 4: Building P2P Databases with Hyperbee and Hyperdrive** of the P2P from Scratch series on
 [heartit.tech](https://heartit.tech). No servers, no accounts; storage (if
 any) is a throwaway temp dir wiped on exit.
 

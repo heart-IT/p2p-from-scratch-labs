@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * p2p-drop — heartIT lab #10 (companion to "From Logs to Databases")
+ * p2p-drop — heartIT lab #10 (companion to "Building P2P Databases with Hyperbee and Hyperdrive")
  *
  * A Hyperdrive is two cores wearing one trench coat: a Hyperbee (metadata —
  * filenames mapped to blob pointers) and a Hyperblobs core (the bytes).

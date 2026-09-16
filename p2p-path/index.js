@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * p2p-path — heartIT lab #9 (companion to Part 1, "The Internet is Hostile")
+ * p2p-path — heartIT lab #9 (companion to Part 1, "NAT Hole Punching Explained")
  *
  * Connection anatomy: make the invisible visible. The DHT knows things about
  * you that your own machine does not — your external address, whether a

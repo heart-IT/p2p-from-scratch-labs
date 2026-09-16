@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * p2p-sparse-db — heartIT lab #4 (companion to "From Logs to Databases")
+ * p2p-sparse-db — heartIT lab #4 (companion to "Building P2P Databases with Hyperbee and Hyperdrive")
  *
  * The sparse-replication capstone, live. Terminal 1 seeds a Hyperbee with
  * 10,000 invoices. Terminal 2 range-queries 50 of them over the swarm —

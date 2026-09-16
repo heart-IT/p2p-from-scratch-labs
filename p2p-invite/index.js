@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * p2p-invite — heartIT lab #12 (companion to "Trust No One, Verify Everything")
+ * p2p-invite — heartIT lab #12 (companion to "P2P Security — Threats, Defenses, and Trust")
  *
  * An invite that gets you in WITHOUT containing the key. Terminal 1 creates
  * a tiny guest book (a Hypercore) and prints an invite string; terminal 2

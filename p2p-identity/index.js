@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * p2p-identity — heartIT lab #7 (companion to "Trust No One, Verify Everything")
+ * p2p-identity — heartIT lab #7 (companion to "P2P Security — Threats, Defenses, and Trust")
  *
  * Sovereign identity in four acts, entirely on your machine:
  *

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * p2p-append-only — heartIT lab #3 (companion to "Append-Only Truth")
+ * p2p-append-only — heartIT lab #3 (companion to "Merkle Trees and Append-Only Logs")
  *
  * A Hypercore is an append-only log where every block is bound into a
  * Merkle tree and the root is signed. This lab runs entirely on your

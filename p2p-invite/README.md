@@ -1,6 +1,6 @@
 # p2p-invite — heartIT lab #12
 
-Companion lab for **Part 7: Trust No One, Verify Everything: Security in P2P Systems** of the P2P from Scratch series on
+Companion lab for **Part 7: P2P Security — Threats, Defenses, and Trust** of the P2P from Scratch series on
 [heartit.tech](https://heartit.tech). No servers, no accounts; storage (if
 any) is a throwaway temp dir wiped on exit.
 

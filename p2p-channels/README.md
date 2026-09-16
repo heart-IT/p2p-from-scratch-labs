@@ -1,6 +1,6 @@
 # p2p-channels — heartIT lab #2
 
-Companion lab for **Part 2: Encrypted Pipes: Secret Stream, Protomux, and Wire Protocols** of the P2P from Scratch series on
+Companion lab for **Part 2: P2P Encryption with the Noise Protocol** of the P2P from Scratch series on
 [heartit.tech](https://heartit.tech). No servers, no accounts; storage (if
 any) is a throwaway temp dir wiped on exit.
 

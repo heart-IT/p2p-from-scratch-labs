@@ -1,6 +1,6 @@
 # p2p-path — heartIT lab #9
 
-Companion lab for **Part 1, "The Internet is Hostile"**, of the **P2P from
+Companion lab for **Part 1: NAT Hole Punching Explained**, of the **P2P from
 Scratch** series on [heartit.tech](https://heartit.tech).
 
 Connection anatomy: make the invisible visible. The DHT knows things about

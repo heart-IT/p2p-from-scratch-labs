@@ -1,6 +1,6 @@
 # p2p-quorum — heartIT lab #11
 
-Companion lab for **Part 6: Many Writers, One Truth: Autobase, Causal DAGs, and Quorum Consensus** of the P2P from Scratch series on
+Companion lab for **Part 6: Multi-Writer Consensus with Autobase** of the P2P from Scratch series on
 [heartit.tech](https://heartit.tech) — this one implements the part's
 "Autobase Partition Recovery" capstone. No servers, no accounts; storage
 is a throwaway temp dir wiped on exit.

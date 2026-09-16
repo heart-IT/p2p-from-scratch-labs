@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * p2p-channels — heartIT lab #2 (companion to "Encrypted Pipes")
+ * p2p-channels — heartIT lab #2 (companion to "P2P Encryption with the Noise Protocol")
  *
  * One encrypted socket, many protocols. Two peers connect over Hyperswarm
  * (the connection is already a Secret Stream — Noise IK, end-to-end

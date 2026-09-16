@@ -1,6 +1,6 @@
 # p2p-swarm-watch — heartIT lab #5
 
-Companion lab for **Part 5: Finding Peers: DHT Discovery, Swarm Lifecycle, and Peer Graphs** of the P2P from Scratch series on
+Companion lab for **Part 5: Peer Discovery with Kademlia DHT** of the P2P from Scratch series on
 [heartit.tech](https://heartit.tech). No servers, no accounts; storage (if
 any) is a throwaway temp dir wiped on exit.
 

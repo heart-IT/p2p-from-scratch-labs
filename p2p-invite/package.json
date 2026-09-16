@@ -1,7 +1,7 @@
 {
   "name": "@heart-it/p2p-invite",
-  "version": "0.1.1",
-  "description": "heartIT lab #12 — an invite string that grants admission without containing the key: blind pairing over the DHT. Companion to 'Trust No One, Verify Everything'.",
+  "version": "0.1.2",
+  "description": "heartIT lab #12 — an invite string that grants admission without containing the key: blind pairing over the DHT. Companion to 'P2P Security — Threats, Defenses, and Trust'.",
   "main": "index.js",
   "bin": {
     "p2p-invite": "index.js"

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * p2p-swarm-watch — heartIT lab #5 (companion to "Finding Peers")
+ * p2p-swarm-watch — heartIT lab #5 (companion to "Peer Discovery with Kademlia DHT")
  *
  * A swarm observatory. Joins a topic and narrates the discovery lifecycle:
  * announcing vs looking up, peers arriving and churning away, reconnects.

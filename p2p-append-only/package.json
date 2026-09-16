@@ -1,7 +1,7 @@
 {
   "name": "@heart-it/p2p-append-only",
-  "version": "0.1.1",
-  "description": "heartIT lab #3 — appends move the Merkle root; truncation loudly bumps the fork id. Companion to 'Append-Only Truth'.",
+  "version": "0.1.2",
+  "description": "heartIT lab #3 — appends move the Merkle root; truncation loudly bumps the fork id. Companion to 'Merkle Trees and Append-Only Logs'.",
   "main": "index.js",
   "bin": {
     "p2p-append-only": "index.js"

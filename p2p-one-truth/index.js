@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * p2p-one-truth — heartIT lab #6 (companion to "Many Writers, One Truth")
+ * p2p-one-truth — heartIT lab #6 (companion to "Multi-Writer Consensus with Autobase")
  *
  * Two writers, no server, one deterministic order. Terminal 1 creates an
  * Autobase; terminal 2 joins with the key and is added as a writer over

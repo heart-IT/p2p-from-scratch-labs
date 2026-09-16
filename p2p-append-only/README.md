@@ -1,6 +1,6 @@
 # p2p-append-only — heartIT lab #3
 
-Companion lab for **Part 3: Append-Only Truth: Hypercore, Flat Trees, and Merkle Proofs** of the P2P from Scratch series on
+Companion lab for **Part 3: Merkle Trees and Append-Only Logs** of the P2P from Scratch series on
 [heartit.tech](https://heartit.tech). No servers, no accounts; storage (if
 any) is a throwaway temp dir wiped on exit.
 

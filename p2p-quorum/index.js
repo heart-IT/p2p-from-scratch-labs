@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * p2p-quorum — heartIT lab #11 (companion to "Many Writers, One Truth";
+ * p2p-quorum — heartIT lab #11 (companion to "Multi-Writer Consensus with Autobase";
  * implements the series' "Autobase Partition Recovery" capstone)
  *
  * Three indexers, one quorum. Terminal 1 creates an Autobase; terminals 2
