@@ -1,6 +1,6 @@
 # p2p-sync-states — heartIT lab #8
 
-Companion lab for **Part 8: Building for Humans: UX, Availability, and Production P2P** of the P2P from Scratch series on
+Companion lab for **Part 8: Offline-First UX for P2P Applications** of the P2P from Scratch series on
 [heartit.tech](https://heartit.tech). No servers, no accounts; storage (if
 any) is a throwaway temp dir wiped on exit.
 

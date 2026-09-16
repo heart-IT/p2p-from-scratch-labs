@@ -1,7 +1,7 @@
 {
   "name": "@heart-it/p2p-sync-states",
-  "version": "0.1.2",
-  "description": "heartIT lab #8 — offline-first writes, late-join catch-up, honest sync indicators. Companion to 'Building for Humans'.",
+  "version": "0.1.3",
+  "description": "heartIT lab #8 — offline-first writes, late-join catch-up, honest sync indicators. Companion to 'Offline-First UX for P2P Applications'.",
   "main": "index.js",
   "bin": {
     "p2p-sync-states": "index.js"

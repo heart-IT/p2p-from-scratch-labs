@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * p2p-sync-states — heartIT lab #8 (companion to "Building for Humans")
+ * p2p-sync-states — heartIT lab #8 (companion to "Offline-First UX for P2P Applications")
  *
  * Offline-first, made visible. Terminal 1 is a writer that appends a
  * journal entry every few seconds — with or without an audience. Terminal 2
